@@ -41,6 +41,7 @@ class WC_Pagarme_Banking_Ticket_Gateway extends WC_Payment_Gateway {
 		$this->debug                  = $this->get_option( 'debug' );
 		$this->async                  = $this->get_option( 'async' );
 		$this->boleto_expiration_date = $this->get_option( 'boleto_expiration_date' );
+		$this->cancel_order           = $this->get_option( 'enable_cancel_order' );
 
 		// Active logs.
 		if ( 'yes' === $this->debug ) {
@@ -140,6 +141,19 @@ class WC_Pagarme_Banking_Ticket_Gateway extends WC_Payment_Gateway {
 				'custom_attributes'  => array(
 					'required' => 'required',
 				),
+			),
+			'enable_cancel_order' => array(
+				'title'       => __( 'Habilitar cancelamento de pedido', 'woocommerce-pagarme' ),
+				'type'        => 'checkbox',
+				'label'       => __( 'Habilitar cancelamento', 'woocommerce-pagarme' ),
+				'default'     => 'no',
+				'description' => sprintf( __( 'Habilitar cancelamento de pedido com número de dias definido em caso de não pagamento do boleto' , 'woocommerce-pagarme' ) ),
+			),
+			'cancel_order' => array(
+				'title'              => __( 'Definir o número de dias para o cancelamento do pedido', 'woocommerce-pagarme' ),
+				'type'               => 'text',
+				'description'        => sprintf( __( 'Definir o número de dias para o cancelamento do pedido em caso de não pagamento do boleto', 'woocommerce-pagarme' ) ),
+				'default'            => '',
 			),
 			'testing' => array(
 				'title'       => __( 'Gateway Testing', 'woocommerce-pagarme' ),
